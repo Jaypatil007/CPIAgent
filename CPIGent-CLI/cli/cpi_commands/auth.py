@@ -4,7 +4,8 @@ import os
 
 def get_cpi_credentials():
     script_dir = os.path.dirname(__file__)
-    credentials_path = os.path.join(script_dir, '..', '..', '..', 'credentials.json')
+    # Go up two directories from auth.py (cpi_commands -> cli -> CPIGent-CLI) and find credentials.json
+    credentials_path = os.path.join(script_dir, '..', '..', 'credentials.json')
     try:
         with open(credentials_path, 'r') as f:
             credentials = json.load(f)
