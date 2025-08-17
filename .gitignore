@@ -29,7 +29,7 @@ credentials.json
 # Specific files to ignore as requested by user
 firebase.md
 GEMINI.md
-
+datafiles.md
 # Editor/IDE files
 .vscode/
 .idea/
@@ -41,3 +41,5 @@ GEMINI.md
 
 # Thumbnails
 .DS_Store
+
+FireBaseData/
