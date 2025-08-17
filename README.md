@@ -15,6 +15,8 @@ This README provides a concise guide to basic Git commands, their purposes, and 
 - [Adding a Remote Repository](#adding-a-remote-repository)
 - [Pushing Changes](#pushing-changes)
 - [Pulling Changes](#pulling-changes)
+- [Merging Branches](#merging-branches)
+- [Creating Pull Requests](#creating-pull-requests)
 - [Fetching Changes](#fetching-changes)
 - [Removing a Remote Repository](#removing-a-remote-repository)
 - [Sparse Checkout (Clone Only a Folder)](#sparse-checkout-clone-only-a-folder)
@@ -130,6 +132,47 @@ git pull origin main
 
 ---
 
+## Merging Branches
+
+Integrate changes from one branch into another.
+
+First, ensure you are on the branch you want to merge into (e.g., `main`):
+```bash
+git checkout main
+```
+
+Then, merge the desired branch (e.g., `feature-branch`) into your current branch:
+```bash
+git merge feature-branch
+```
+
+If conflicts occur, you'll need to resolve them manually, then `git add` the resolved files and `git commit` to finalize the merge.
+
+---
+
+## Creating Pull Requests
+
+A Pull Request (PR) is a way to propose changes and have them reviewed before merging into a main branch on platforms like GitHub.
+
+1. **Push your feature branch to the remote:**
+   ```bash
+   git push origin feature-branch
+   ```
+
+2. **Go to your GitHub repository:**
+   * GitHub will usually detect the newly pushed branch and prompt you to create a Pull Request.
+   * If not, navigate to the "Pull requests" tab and click "New pull request".
+
+3. **Select the branches:** Choose your `feature-branch` as the `compare` branch and the target branch (e.g., `main`) as the `base` branch.
+
+4. **Add a title and description:** Clearly explain the changes you've made and why.
+
+5. **Create the Pull Request:** Click "Create pull request".
+
+6. **Review and Merge:** Others can review your code, suggest changes, and once approved, the PR can be merged into the base branch.
+
+---
+
 ## Fetching Changes
 
 Download changes from the remote repository without merging:
@@ -223,6 +266,7 @@ This means the remote repo has changes your local branch doesn't have.
 | `git remote add origin <url>`   | Add remote repo                                    |
 | `git push -u origin main`       | Push local branch to remote                        |
 | `git pull origin main`          | Fetch & merge remote changes                       |
+| `git merge <branch>`            | Merge changes from one branch into another         |
 | `git fetch origin`              | Fetch remote changes without merging               |
 | `git remote remove origin`      | Remove remote repo                                 |
 | Sparse checkout                 | Clone only part of the repo (see section above)    |
@@ -232,4 +276,3 @@ This means the remote repo has changes your local branch doesn't have.
 ## Need Help?
 
 For more details on any command, use `git help <command>` or visit the [Git documentation](https://git-scm.com/doc).
-
