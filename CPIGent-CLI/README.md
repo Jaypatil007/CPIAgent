@@ -1,16 +1,16 @@
 # CPIGent CLI
 
-CPIGent CLI is a powerful, interactive command-line interface for communicating with Google's Gemini large language models.
+CPIGent CLI is a powerful, interactive command-line interface for communicating with Google's Gemini large language models and interacting with CPI artifacts.
 
 Built with Python, Typer, and Rich, it provides a beautiful and intuitive user experience directly in your terminal, complete with command autocompletion, syntax highlighting, and Markdown rendering.
 
 ## Features
 
 - **Interactive Chat:** Engage in a conversation with the Gemini Pro model.
-- **Rich Output:** Responses from the AI are beautifully rendered with support for Markdown, including tables, lists, and syntax-highlighted code blocks.
-- **Smart Command System:** Use `!` commands to control the CLI without interrupting your conversation (e.g., `!exit`, `!config`).
-- **Interactive Command Suggestions:** Start typing `!` to see a numbered list of available commands. Select with arrow keys or a number shortcut.
-- **Configuration Management:** Easily set and view your API key and preferred model from the terminal or within the chat.
+- **CPI Integration:** Authenticate and interact with CPI packages and artifacts.
+- **Rich Output:** Responses are beautifully rendered with support for Markdown, tables, and syntax-highlighted code.
+- **Smart Command System:** Use `!` commands to control the CLI without interrupting your conversation.
+- **Configuration Management:** Easily manage your API key and model from the terminal or within the chat.
 
 ## Getting Started
 
@@ -18,13 +18,14 @@ Built with Python, Typer, and Rich, it provides a beautiful and intuitive user e
 
 - Python 3.8+
 - A Google Gemini API Key. You can get one from [Google AI Studio](https://aistudio.google.com/).
+- Access credentials for your CPI instance.
 
 ### Installation
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/Jaypatil007/mycpi-cli.git
-    cd mycpi-cli/CPIGent-CLI
+    git clone https://github.com/Jaypatil007/CPIAgent.git
+    cd CPIAgent/CPIGent-CLI
     ```
 
 2.  **Create and activate a virtual environment:**
@@ -40,38 +41,41 @@ Built with Python, Typer, and Rich, it provides a beautiful and intuitive user e
 
 ### Configuration
 
-Before you can start a chat, you need to configure your Gemini API key. You can do this in two ways:
+Before running the application, you need to configure two essential files in the `CPIGent-CLI` directory.
 
-1.  **Recommended (Interactive):** Run the `chat` command and set the key from within the chat.
-    ```bash
-    python main.py chat
-    ```
-    Inside the chat, type:
-    ```
-    You: !config set api_key YOUR_API_KEY_HERE
+1.  **Create the Credentials File (`credentials.json`)**
+
+    This file stores the OAuth details required to connect to your CPI instance. Create a file named `credentials.json` and add the following content, replacing the placeholder values with your actual credentials:
+
+    ```json
+    {
+      "oauth": {
+        "clientid": "YOUR_CPI_CLIENT_ID",
+        "clientsecret": "YOUR_CPI_CLIENT_SECRET",
+        "tokenurl": "YOUR_CPI_TOKEN_URL",
+        "url": "YOUR_CPI_API_BASE_URL"
+      }
+    }
     ```
 
-2.  **Alternative (Terminal):** Set the key directly from your terminal.
-    ```bash
-    python main.py config set api_key YOUR_API_KEY_HERE
-    ```
+2.  **Create the Environment File (`.env`)**
 
-You can also change the model you are using (the default is `gemini-1.5-pro-latest`).
-```bash
-python main.py config set model gemini-pro
-```
+    This file is used to store your Google Gemini API key securely. Create a file named `.env` and add your key:
+
+    ```
+    GEMINI_API_KEY="YOUR_GEMINI_API_KEY_HERE"
+    ```
+    The application will automatically load this key on startup.
 
 ## Usage
 
 ### Starting a Chat Session
 
 To begin your conversation with the AI, run:
-
 ```bash
 python main.py chat
 ```
-
-This will launch the interactive prompt. Simply type your question and press Enter.
+This launches the interactive prompt. Simply type your question and press Enter.
 
 ### In-Chat Commands
 
@@ -79,6 +83,5 @@ In-chat commands give you control over the application without needing to exit. 
 
 -   **`!help`**: Displays a list of all available in-chat commands.
 -   **`!config show`**: Shows the current model and confirms if the API key is set.
--   **`!config set api_key <KEY>`**: Sets or updates your Gemini API key.
--   **`!config set model <MODEL_NAME>`**: Changes the Gemini model to use.
+-   **`!config set model <MODEL_NAME>`**: Changes the Gemini model to use (e.g., `gemini-pro`).
 -   **`!exit`** or **`!quit`**: Ends the chat session.
