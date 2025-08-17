@@ -93,7 +93,7 @@ def start_chat():
     if not api_key or api_key == "YOUR_API_KEY_HERE":
         console.print("[bold yellow]Gemini API key not configured. Use `!config set api_key <YOUR_KEY>` to set it.[/bold yellow]")
 
-    commands = ["!help", "!exit", "!quit", "!config set api_key ", "!config set model ", "!config show", "!cpi list packages", "!cpi list artifacts"]
+    commands = ["!help", "!exit", "!quit", "!config set api_key ", "!config set model ", "!config show", "!cpi list packages", "!cpi list artifacts", "!cpi download ", "!cpi deploy "]
     completer = NumberedCompleter(commands)
     
     style = Style.from_dict({
@@ -130,12 +130,12 @@ def start_chat():
                 continue
 
             if prompt.startswith("!"):
-                command = prompt[1:].lower().strip()
-                if command in ["exit", "quit"]:
+                command = prompt[1:].strip()
+                if command.lower() in ["exit", "quit"]:
                     console.print("[bold yellow]Session ended.[/bold yellow]")
                     break
-                elif command == "help":
-                     console.print("[bold]Available commands:[/] \n- `!exit` or `!quit`: End the session.\n- `!config set <key> <value>`: Set a config key (api_key, model).\n- `!config show`: Show current configuration.\n- `!cpi list packages`: List SAP CPI integration packages.\n- `!cpi list artifacts`: List SAP CPI integration runtime artifacts.")
+                elif command.lower() == "help":
+                     console.print("[bold]Available commands:[/] \n- `!exit` or `!quit`: End the session.\n- `!config set <key> <value>`: Set a config key (api_key, model).\n- `!config show`: Show current configuration.\n- `!cpi list packages`: List SAP CPI integration packages.\n- `!cpi list artifacts`: List SAP CPI integration runtime artifacts.\n- `!cpi download <artifact_id>`: Download an artifact.\n- `!cpi deploy <file_path> --artifact-id <id> --artifact-name <name> --package-id <pkg_id>`: Deploy an artifact.")
                 else:
                     handle_chat_command(command)
                 continue
